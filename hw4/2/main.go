@@ -16,14 +16,13 @@ func main() {
 	signal.Notify(sigs, syscall.SIGINT)
 
 	go func() {
-		fmt.Println(<-sigs)
+		fmt.Printf("%s", <-sigs)
 		close(done) //close channel or done <- true
 	}()
 
-	fmt.Println("awaiting signal")
+	fmt.Printf("%s \n", "awaiting signal")
 
 	<-done //trying to read
 	time.Sleep(1 * time.Second)
-	fmt.Println("exiting")
-
+	fmt.Printf("\n%s", "exiting")
 }

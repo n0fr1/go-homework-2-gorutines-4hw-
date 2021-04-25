@@ -12,25 +12,18 @@ func main() {
 	countChan <- 0
 
 	for i := 0; i < 1000; i++ {
-
 		workers <- i
 
 		go func() {
-
 			defer func() {
 				<-workers
 			}()
 
 			counter := <-countChan
 			counter++
-
 			countChan <- counter
-
 		}()
-
 	}
-
 	time.Sleep(2 * time.Second)
 	fmt.Printf("%d", <-countChan)
-
 }
